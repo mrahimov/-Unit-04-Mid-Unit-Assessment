@@ -1,9 +1,12 @@
 package nyc.c4q.unit04mid_unitassessment;
 
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import controler.MyAdapter;
 import model.DataModel;
 import model.JsonDataHolder;
 
@@ -22,12 +26,14 @@ import model.JsonDataHolder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BottomFragmen extends Fragment {
+public class BottomFragment extends Fragment {
 
     private View rootView;
-    private List<DataModel> data;
+    private List<DataModel> models;
+    private PassDataInterface passDataInterface;
+    private JsonDataHolder json;
 
-    public BottomFragmen() {
+    public BottomFragment() {
         // Required empty public constructor
     }
 
@@ -38,18 +44,26 @@ public class BottomFragmen extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_bottom, container, false);
 
+
         return rootView;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        JsonDataHolder jsonDataHolder = new JsonDataHolder();
-        data = new ArrayList<>();
-
+        models = new ArrayList<>();
         try {
-            String jsonData = jsonDataHolder.jsonData;
+            json = new JsonDataHolder();
+            String jsonData = json.jsonData;
 
             JSONObject jsonObject = new JSONObject(jsonData);
             JSONArray jsonArray = jsonObject.getJSONArray("books");
@@ -67,7 +81,7 @@ public class BottomFragmen extends Fragment {
                 dataModel.setTitle(title);
                 dataModel.setAuthor(author);
                 dataModel.setYear(year);
-                data.add(dataModel);
+                models.add(dataModel);
 
             }
 
@@ -75,5 +89,19 @@ public class BottomFragmen extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        MyAdapter adapter = new MyAdapter(models, passDataInterface);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+
+    }
+
+    public void setListener(PassDataInterface passDataInterface) {
+        this.passDataInterface = passDataInterface;
     }
 }

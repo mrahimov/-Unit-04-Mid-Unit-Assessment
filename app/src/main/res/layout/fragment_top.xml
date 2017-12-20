@@ -1,13 +1,37 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="nyc.c4q.unit04mid_unitassessment.TopFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textview_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:hint="title"
+        android:textSize="28sp"
+        android:textStyle="italic"/>
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textview_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="author"
+        android:textSize="28sp"
+        android:textStyle="italic"/>
+
+
+    <TextView
+        android:id="@+id/textview_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="year"
+        android:textSize="28sp"
+        android:textStyle="italic"/>
+
+
+</LinearLayout>

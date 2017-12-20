@@ -17,7 +17,8 @@ import android.widget.Button;
 public class MainFragment extends Fragment {
 
     View rootView;
-    Button buttonMainFrag;
+    Button buttonMainFragment;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -30,14 +31,16 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        buttonMainFrag = rootView.findViewById(R.id.button_mainfragment);
+        buttonMainFragment = rootView.findViewById(R.id.button_mainfragment);
 
-        buttonMainFrag.setOnClickListener(new View.OnClickListener() {
+        buttonMainFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 DisplayFragment displayFragment = new DisplayFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
                 fragmentTransaction.replace(R.id.fragment_container, displayFragment).addToBackStack("Murad").commit();
@@ -45,6 +48,7 @@ public class MainFragment extends Fragment {
         });
 
         return rootView;
+
     }
 
 }
